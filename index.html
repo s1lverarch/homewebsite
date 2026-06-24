@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SilverArch Linux — Built for Absolute Performance</title>
+<link rel="icon" type="image/x-icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:    #020204;
+  --bg1:   #05050A;
+  --bg2:   #080810;
+  --bg3:   #0C0C16;
+  --silver:#A8A8C0;
+  --shi:   #D8D8F0;
+  --blue:  #5BA3C9;
+  --blue2: #3A7A9E;
+  --cyan:  #4EC9B0;
+  --green: #3FB950;
+  --dim:   #505068;
+  --dim2:  #383850;
+  --border:rgba(168,168,192,0.07);
+  --border2:rgba(91,163,201,0.15);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--silver);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg1)}
+::-webkit-scrollbar-thumb{background:var(--dim2);border-radius:2px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 48px;
+  background:rgba(2,2,4,0.94);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:.95rem;font-weight:600;color:var(--shi);letter-spacing:.03em}
+.nav-logo img{width:28px;height:28px;filter:brightness(1.2)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--dim);font-size:.78rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--shi)}
+.nav-btn{background:transparent;border:1px solid var(--blue2);color:var(--blue);padding:6px 16px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.75rem;transition:all .2s}
+.nav-btn:hover{background:rgba(91,163,201,0.08);border-color:var(--blue);color:var(--shi)}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:130px 24px 80px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('bashscriptwallpaperdark.jpg') center/cover no-repeat;
+  opacity:.13;
+  pointer-events:none;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(2,2,4,0.55) 0%,rgba(2,2,4,0.1) 40%,rgba(2,2,4,0.85) 85%,var(--bg) 100%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(91,163,201,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(91,163,201,0.02) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 40%,black 10%,transparent 75%);
+  pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:15%;left:50%;transform:translateX(-50%);
+  width:500px;height:350px;
+  background:radial-gradient(ellipse,rgba(91,163,201,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.logo-wrap{
+  position:relative;margin-bottom:30px;
+  display:inline-flex;align-items:center;justify-content:center;
+  animation:float 7s ease-in-out infinite;
+}
+.logo-ring{
+  position:absolute;inset:-16px;
+  border-radius:50%;
+  border:1px solid rgba(91,163,201,0.25);
+  box-shadow:0 0 32px rgba(91,163,201,0.12),inset 0 0 24px rgba(91,163,201,0.06);
+}
+.logo-ring2{
+  position:absolute;inset:-28px;
+  border-radius:50%;
+  border:1px solid rgba(91,163,201,0.08);
+}
+.hero-logo{width:110px;height:110px;filter:brightness(1.5) drop-shadow(0 0 28px rgba(91,163,201,0.5)) drop-shadow(0 0 60px rgba(91,163,201,0.2));position:relative;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fu .6s .1s forwards}
+h1{font-size:clamp(2.6rem,6.5vw,5rem);font-weight:700;color:var(--shi);letter-spacing:-.03em;line-height:1.05;margin-bottom:18px;opacity:0;animation:fu .7s .25s forwards}
+h1 em{font-style:normal;color:var(--blue)}
+.hero-desc{font-size:1rem;color:var(--dim);max-width:460px;margin:0 auto 36px;line-height:1.75;opacity:0;animation:fu .7s .4s forwards}
+
+/* terminal */
+.terminal{
+  background:#000003;border:1px solid var(--border2);border-radius:6px;
+  max-width:520px;width:100%;margin-bottom:40px;text-align:left;
+  box-shadow:0 0 48px rgba(91,163,201,0.06);
+  opacity:0;animation:fu .7s .55s forwards;overflow:hidden;
+}
+.t-bar{background:#070710;border-bottom:1px solid var(--border);padding:8px 14px;display:flex;align-items:center;gap:6px}
+.tb{width:10px;height:10px;border-radius:50%}
+.tb-r{background:#FF5F56}.tb-y{background:#FFBD2E}.tb-g{background:#27C93F}
+.t-title{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--dim);margin:0 auto}
+.t-body{padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.85}
+.tl{color:var(--dim);margin-bottom:1px;display:none}
+.tl.ok::before{content:'[  OK  ] ';color:#27C93F}.tl.ok{color:var(--green)}
+.tl.ld::before{content:'Loading ';color:var(--blue)}
+.tl .cur{display:inline-block;width:7px;height:.85em;background:var(--blue);margin-left:1px;vertical-align:middle;animation:bl 1s step-end infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fu .7s .7s forwards}
+.btn-p{background:var(--blue);color:#000;padding:12px 28px;border-radius:4px;font-weight:700;font-size:.88rem;transition:all .2s}
+.btn-p:hover{background:var(--shi);transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,163,201,0.25)}
+.btn-g{background:transparent;color:var(--silver);border:1px solid var(--border2);padding:12px 28px;border-radius:4px;font-size:.88rem;transition:all .2s}
+.btn-g:hover{border-color:rgba(168,168,192,0.3);color:var(--shi)}
+
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTIONS */
+.wrap{max-width:1040px;margin:0 auto;padding:80px 24px}
+.sep{border:none;border-top:1px solid var(--border);margin:0}
+.lbl{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue);letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--shi);letter-spacing:-.02em;margin-bottom:12px}
+.sub{color:var(--dim);font-size:.95rem;line-height:1.8;max-width:560px}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;margin-top:44px;background:var(--border);border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.fc{background:var(--bg1);padding:26px;transition:background .2s}
+.fc:hover{background:var(--bg3)}
+.fi{font-size:1.3rem;margin-bottom:12px;display:block}
+.ft{font-size:.9rem;font-weight:600;color:var(--shi);margin-bottom:6px}
+.fd{font-size:.82rem;color:var(--dim);line-height:1.6}
+
+/* SMDR */
+.smdr-bg{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.smdr-inner{max-width:1040px;margin:0 auto;padding:80px 24px}
+
+.ascii-pre{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  color:var(--blue2);line-height:1.5;margin-bottom:24px;
+  white-space:pre;display:inline-block;text-align:left
+}
+
+/* distro grid */
+.dg-wrap{background:#000003;border:1px solid var(--border2);border-radius:7px;overflow:hidden;margin:36px 0 28px}
+.dg-bar{background:#07070F;border-bottom:1px solid var(--border);padding:9px 18px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--dim);display:flex;justify-content:space-between}
+.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));padding:6px}
+.di{padding:7px 10px;display:flex;align-items:center;gap:7px;border-radius:3px;transition:background .15s}
+.di:hover{background:rgba(91,163,201,0.07)}
+.dn{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--dim2);min-width:18px}
+.da{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue);font-weight:600}
+.dm{font-size:.72rem;color:var(--silver)}
+.dg-note{padding:10px 18px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--dim)}
+.dg-note strong{color:var(--cyan)}
+
+/* usage */
+.usage{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.cc{background:#000003;border:1px solid var(--border2);border-radius:5px;overflow:hidden}
+.cc-t{background:#06060E;border-bottom:1px solid var(--border);padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--dim);letter-spacing:.05em}
+.cc pre{padding:14px;font-family:'JetBrains Mono',monospace;font-size:.76rem;line-height:1.85;overflow-x:auto}
+.cmd{color:var(--shi)}.kw{color:var(--blue)}.str{color:var(--cyan)}.cmt{color:var(--dim)}.flag{color:#C586C0}
+
+.usage-hint{background:#000003;border:1px solid var(--border2);border-radius:4px;padding:11px 16px;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--dim)}
+.usage-hint span{color:var(--shi)}
+
+/* DOWNLOAD */
+.dl-wrap{max-width:800px;margin:48px auto 0}
+.dl-card{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;overflow:hidden}
+.dl-head{background:var(--bg3);border-bottom:1px solid var(--border2);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.dl-name{font-size:1rem;font-weight:700;color:var(--shi)}
+.dl-ver{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--blue);margin-top:3px}
+.dl-sz{text-align:right}
+.dl-sz-n{font-size:1.15rem;font-weight:700;color:var(--shi)}
+.dl-sz-s{font-size:.74rem;color:var(--dim);margin-top:2px}
+.dl-body{padding:22px 28px}
+.dl-btn{display:block;width:100%;background:var(--blue);color:#000;text-align:center;padding:13px 0;border-radius:4px;font-weight:700;font-size:.88rem;transition:all .2s;letter-spacing:.02em}
+.dl-btn:hover{background:var(--shi);transform:translateY(-1px);box-shadow:0 8px 28px rgba(91,163,201,0.2)}
+.dl-hash{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--dim2);word-break:break-all;line-height:1.6}
+.dl-hash strong{color:var(--dim);margin-right:6px}
+
+/* NEWS */
+.news-feed{background:var(--bg2);border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-top:32px}
+.news-feed-bar{background:var(--bg3);border-bottom:1px solid var(--border);padding:9px 18px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--dim);display:flex;justify-content:space-between;align-items:center}
+.news-feed-bar span:last-child{color:var(--cyan)}
+#news-list{list-style:none;padding:0}
+#news-list li{padding:11px 18px;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:9px;transition:background .15s}
+#news-list li:last-child{border-bottom:none}
+#news-list li:hover{background:rgba(91,163,201,0.04)}
+#news-list .arrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue);flex-shrink:0}
+#news-list a{color:var(--silver);font-size:.86rem;line-height:1.5;transition:color .2s}
+#news-list a:hover{color:var(--shi)}
+
+/* REPO METRICS */
+.metrics-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.metric-box{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:16px 22px;flex:1;min-width:130px}
+.metric-val{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--shi);margin-bottom:3px}
+.metric-val.green{color:var(--green)}
+.metric-key{font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+
+/* ABOUT */
+.about-split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:48px}
+.about-screen{border-radius:8px;overflow:hidden;border:1px solid var(--border2);box-shadow:0 24px 60px rgba(0,0,0,0.7),0 0 0 1px rgba(91,163,201,0.08);position:relative}
+.about-screen img{width:100%;display:block;border-radius:7px}
+.about-screen::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(2,2,4,0.55));pointer-events:none;border-radius:7px}
+.about-text p{color:var(--dim);line-height:1.82;margin-bottom:16px;font-size:.93rem}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.pill{background:rgba(91,163,201,0.07);border:1px solid rgba(91,163,201,0.18);color:var(--blue);padding:4px 13px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.72rem}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px}
+.gcard{border-radius:7px;overflow:hidden;border:1px solid var(--border);position:relative;aspect-ratio:16/9;cursor:pointer;transition:all .3s}
+.gcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease,filter .4s ease;filter:brightness(.75)}
+.gcard:hover img{transform:scale(1.04);filter:brightness(1)}
+.gcard::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(2,2,4,0.6));pointer-events:none}
+.gcard-label{position:absolute;bottom:12px;left:14px;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(216,216,240,.5);z-index:1;transition:color .3s}
+.gcard:hover .gcard-label{color:var(--shi)}
+
+/* COMMUNITY */
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:40px}
+.ccard{background:var(--bg1);border:1px solid var(--border);border-radius:6px;padding:22px 20px;transition:all .2s;display:block}
+.ccard:hover{border-color:var(--blue2);background:var(--bg3);transform:translateY(-2px)}
+.ci{font-size:1.4rem;margin-bottom:10px;display:block}
+.ct{font-weight:600;color:var(--shi);margin-bottom:4px;font-size:.9rem}
+.cd{color:var(--dim);font-size:.8rem;line-height:1.6}
+
+/* INSTALL STEPS */
+.install-steps{display:flex;flex-direction:column;gap:0;margin-top:36px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.install-step{display:flex;gap:0;border-bottom:1px solid var(--border);transition:background .2s}
+.install-step:last-child{border-bottom:none}
+.install-step:hover{background:rgba(91,163,201,0.025)}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--dim2);padding:28px 28px 28px 24px;min-width:80px;display:flex;align-items:flex-start;padding-top:30px;flex-shrink:0;border-right:1px solid var(--border)}
+.step-body{padding:24px 28px;flex:1}
+.step-title{font-size:.98rem;font-weight:600;color:var(--shi);margin-bottom:6px}
+.step-desc{font-size:.82rem;color:var(--dim);margin-bottom:14px;line-height:1.6}
+.code-block{background:#000003;border:1px solid var(--border2);border-radius:5px;overflow:hidden}
+.cb-bar{background:#06060E;border-bottom:1px solid var(--border);padding:6px 14px;display:flex;justify-content:space-between;align-items:center}
+.cb-lang{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:.06em}
+.cb-copy{background:transparent;border:1px solid var(--border2);color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:2px 9px;border-radius:3px;cursor:pointer;transition:all .2s}
+.cb-copy:hover{border-color:var(--blue);color:var(--blue)}
+.cb-copy.copied{border-color:var(--green);color:var(--green)}
+.code-block pre{padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.76rem;line-height:1.85;overflow-x:auto}
+
+/* PALESTINE BANNER */
+.pal-banner{
+  background:linear-gradient(135deg,rgba(0,0,0,0.0) 0%,rgba(0,100,0,0.04) 100%);
+  border:1px solid rgba(255,255,255,0.07);
+  border-left:3px solid #009736;
+  border-radius:6px;
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  margin-top:40px;
+}
+.pal-left{display:flex;align-items:center;gap:12px}
+.pal-flag{font-size:1.3rem;flex-shrink:0}
+.pal-text{font-size:.84rem;color:var(--silver);line-height:1.5}
+.pal-text strong{color:var(--shi);display:block;margin-bottom:2px;font-size:.9rem}
+.pal-link{
+  background:transparent;border:1px solid rgba(0,151,54,0.4);
+  color:#3DBF6A;padding:6px 16px;border-radius:3px;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  white-space:nowrap;transition:all .2s;flex-shrink:0
+}
+.pal-link:hover{background:rgba(0,151,54,0.08);border-color:#3DBF6A;color:#6FD98F}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;background:var(--bg1)}
+.fl{display:flex;align-items:center;gap:8px;color:var(--dim);font-size:.82rem}
+.fl img{width:20px;height:20px;opacity:.5;filter:brightness(1.1)}
+.flinks{display:flex;gap:16px}
+.flinks a{color:var(--dim);font-size:.78rem;transition:color .2s}
+.flinks a:hover{color:var(--silver)}
+.fn{color:var(--dim2);font-size:.74rem;font-family:'JetBrains Mono',monospace}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.r.v{opacity:1;transform:translateY(0)}
+.r2{opacity:0;transform:translateY(20px);transition:opacity .65s .12s ease,transform .65s .12s ease}
+.r2.v{opacity:1;transform:translateY(0)}
+
+@media(max-width:700px){
+  nav{padding:12px 16px}.nav-links{display:none}
+  .usage{grid-template-columns:1fr}
+  .about-split{grid-template-columns:1fr;gap:28px}
+  .gallery{grid-template-columns:1fr}
+  footer{flex-direction:column;align-items:flex-start;padding:20px 16px}
+  .ascii-pre{font-size:.52rem}
+  .metrics-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="Un-removebg-preview.png" alt="" onerror="this.style.display='none'">
+    SilverArch Linux 
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">📤-Features</a></li>
+    <li><a href="#about">📍-About</a></li>
+    <li><a href="#smdr">🗂-Smdr</a></li>
+    <li><a href="#community">👥-Community</a></li>
+  </ul>
+  <a class="nav-btn" href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">📚-Wiki</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="logo-wrap">
+    <div class="logo-ring2"></div>
+    <div class="logo-ring"></div>
+    <img class="hero-logo" src="Un-removebg-preview.png" alt="SilverArch" onerror="this.style.opacity='0'">
+  </div>
+  <div class="hero-tag">Arch-Based · Made in Tunisia · International</div>
+  <h1>Built for<br><em>Absolute Performance</em></h1>
+  <p class="hero-desc">The first Arabic-Tunisian Arch-based Linux distribution. Minimal, fast, and community-driven across 50 distro environments.</p>
+
+  <div class="terminal">
+    <div class="t-bar">
+      <span class="tb tb-r"></span><span class="tb tb-y"></span><span class="tb tb-g"></span>
+      <span class="t-title">SilverArch Boot · QEMU/KVM</span>
+    </div>
+    <div class="t-body">
+      <div class="tl ld" id="t1">silverarch/boot/x86_64/vmlinuz-linux...</div>
+      <div class="tl ok" id="t2">vmlinuz-linux loaded</div>
+      <div class="tl ld" id="t3">silverarch/boot/x86_64/initramfs-linux.img...</div>
+      <div class="tl ok" id="t4">initramfs mounted</div>
+      <div class="tl"    id="t5" style="color:var(--silver)">Starting SilverArch Linux...<span class="cur"></span></div>
+    </div>
+  </div>
+
+  <div class="hero-btns">
+    <a class="btn-p" href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">Read the Wiki</a>
+    <a class="btn-g" href="https://discord.gg/eBgVHSPru9" target="_blank">Join Discord</a>
+    <a class="btn-g" href="https://github.com/iyed-one-st/silverarch-repo" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- FEATURES -->
+<div class="wrap" id="features">
+  <div class="r">
+    <div class="lbl">// core properties</div>
+    <h2>Raw Power. Zero Bloat.</h2>
+    <p class="sub">Arch foundation, rolling release, full AUR access — pre-configured and ready to run.</p>
+  </div>
+  <div class="feat-grid r2">
+    <div class="fc"><span class="fi">⚡</span><div class="ft">Absolute Performance</div><div class="fd">Lean Arch core. No hidden overhead. Your hardware, your rules.</div></div>
+    <div class="fc"><span class="fi">🏛️</span><div class="ft">Full Arch-Based</div><div class="fd">pacman, AUR, rolling-release. Cutting-edge packages, always.</div></div>
+    <div class="fc"><span class="fi">📦</span><div class="ft">smdr · 50 Distros</div><div class="fd">One CLI across 50 Linux environments. Any package manager, any system.</div></div>
+    <div class="fc"><span class="fi">🌍</span><div class="ft">International Support</div><div class="fd">English, Arabic, Russian. First Arabic-Tunisian Arch distro with global reach. For More Infos Join Discord Server</div></div>
+    <div class="fc"><span class="fi">🔒</span><div class="ft">System Geography Origines</div><div class="fd">Did you know Silverarch Linux Is The First Arabic Indie Arch-based Distribution</div></div>
+    <div class="fc"><span class="fi">🔊</span><div class="ft">Open-Sorce Community</div><div class="fd">SilverArch Linux Has A Community And Wiki Wich Means It Will Be Easy To Install</div></div>
+    <div class="fc"><span class="fi">📖</span><div class="ft">GPL-v3 Open Source</div><div class="fd">Fully open. Contribute packages, docs, translations. Built for everyone, to everything.</div></div>
+    <div class="fc"><span class="fi">🚀</span><div class="ft">The Linux Freedom</div><div class="fd">Silverarch Pkg Are Not Pre-Installed Only silverarch-installer and silverarch-keyrings You are The Owner Of The System, So You Choice If You Want Install Or Not  .</div></div>  
+  </div>
+
+  <!-- DOWNLOAD -->
+  <div class="r" style="margin-top:64px">
+    <div class="lbl">// release media</div>
+    <h2>SilverArch Release Media</h2>
+    <p class="sub">Verified stable builds for x86_64 architecture.</p>
+  </div>
+  <div class="dl-wrap r2">
+    <div class="dl-card">
+      <div class="dl-head">
+        <div>
+          <div class="dl-name">SilverArch Full ISO — The First Edition</div>
+          <div class="dl-ver">v2026.06.22 · x86_64</div>
+        </div>
+        <div class="dl-sz">
+          <div class="dl-sz-n">1.2 GB</div>
+          <div class="dl-sz-s">UEFI / Legacy Boot</div>
+        </div>
+      </div>
+      <div class="dl-body">
+        <a class="dl-btn"
+          href="https://github.com/iyed-one-st/silverarch-repo/releases/download/SilverarchLinux(v2026.06.22)/SilverArch_Linux_Full_ISO-2026.06.10-x86_64.iso"
+          target="_blank">↓ DOWNLOAD RELEASE</a>
+        <div class="dl-hash"><strong>SHA256</strong>e03e748a145c65a43b21eaddf07be2e9520dc2ad89cbfa6243f203b756526bb7</div>
+      </div>
+    </div>
+  </div>
+  <div class="r" style="margin-top:64px">
+    <h2>Installing on top of Arch Linux</h2>
+    <p class="sub">The Silverarch Repository is a specialized package repository for the Silverarch Linux distribution. Add it to any Arch-based system — Arch Linux, ArchARM, or any Arch-based distro.</p>
+  </div>
+
+  <div class="install-steps r2">
+
+    <div class="install-step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-title">Open your <a href="https://wiki.archlinux.org/title/Pacman" target="_blank" style="color:var(--blue);border-bottom:1px solid var(--border2)">pacman</a> config</div>
+        <div class="step-desc">Edit your pacman configuration file with your preferred editor.</div>
+        <div class="code-block">
+          <div class="cb-bar">
+            <span class="cb-lang">bash</span>
+            <button class="cb-copy" onclick="copyCode(this)">📋-Copy</button>
+          </div>
+          <pre><span class="kw">$</span> sudo nano /etc/pacman.conf</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-title">Add the Silverarch repository</div>
+        <div class="step-desc">Paste this at the bottom of your config file.</div>
+        <div class="code-block">
+          <div class="cb-bar">
+            <span class="cb-lang">pacman.conf</span>
+            <button class="cb-copy" onclick="copyCode(this)">📋-Copy</button>
+          </div>
+          <pre><span class="str">[silverarch-repo]</span>
+<span class="cmd">SigLevel</span> = Optional TrustAll
+<span class="cmd">Server</span>   = https://raw.githubusercontent.com/s1lverarch/silverarch-repo/main/x86_64/</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-title">Sync &amp; update</div>
+        <div class="step-desc">Update all your repos and packages.</div>
+        <div class="code-block">
+          <div class="cb-bar">
+            <span class="cb-lang">bash</span>
+            <button class="cb-copy" onclick="copyCode(this)">📋-Copy</button>
+          </div>
+          <pre><span class="kw">$</span> sudo pacman -Syy</pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NEWS -->
+  <div class="r" style="margin-top:64px">
+    <div class="lbl">// live updates</div>
+    <h2>Latest Linux News</h2>
+    <p class="sub">Latest from Phoronix — The Linux Tech Pulse.</p>
+  </div>
+  <div class="news-feed r2">
+    <div class="news-feed-bar">
+      <span>phoronix.com · rss feed</span>
+      <span>live</span>
+    </div>
+    <ul id="news-list">
+      <li><span class="arrow">›</span><a href="#">Fetching the latest signals...</a></li>
+    </ul>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- ABOUT -->
+<div class="wrap" id="about">
+  <div class="about-split">
+    <div class="r">
+      <div class="about-screen">
+        <img src="bashscriptwallpaperdark.jpg" alt="SilverArch Linux running">
+      </div>
+    </div>
+    <div class="r2 about-text">
+      <div class="lbl">// origin story</div>
+      <h2>Made in Tunisia.<br>Built for the World.</h2>
+      <p>SilverArch Linux started as a personal project by Silvercore — a Linux distribution engineer from Tunisia who wanted an Arch-based system tuned for real-world performance, not theoretical benchmarks.</p>
+      <p>What began as a local effort grew into the first Arabic Tunisian Arch-based distribution with a truly international audience — supported by a multilingual community spanning Arabic, English, and Russian speakers.</p>
+      <div class="pills">
+        <span class="pill">pacman</span>
+        <span class="pill">AUR</span>
+        <span class="pill">rolling release</span>
+        <span class="pill">x86_64</span>
+        <span class="pill">GPL-v3</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- wallpaper gallery -->
+  <div class="r" style="margin-top:64px">
+    <div class="lbl">// wallpapers</div>
+    <h2>The SilverArch Aesthetic</h2>
+    <p class="sub">Official wallpapers shipped with SilverArch Linux.</p>
+  </div>
+  <div class="gallery r2">
+    <div class="gcard">
+      <img src="darkcrystals.jpg" alt="Dark Crystals wallpaper">
+      <span class="gcard-label">darkcrystals.jpg</span>
+    </div>
+    <div class="gcard">
+      <img src="darkgalaxy.jpg" alt="Dark Galaxy wallpaper">
+      <span class="gcard-label">darkgalaxy.jpg</span>
+    </div>
+    <div class="gcard">
+      <img src="yanestashlivdark.jpg" alt="Yanesta Shliv Dark wallpaper">
+      <span class="gcard-label">yanestashlivdark.jpg</span>
+    </div>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- SMDR -->
+<div class="smdr-bg" id="smdr">
+<div class="smdr-inner">
+  <div class="r" style="text-align:center;margin-bottom:4px">
+    <div class="lbl" style="margin-bottom:16px">// container management engine</div>
+    <pre class="ascii-pre"> ____  __  __ ____  ____
+/ ___||  \/  |  _ \|  _ \
+\___ \| |\/| | | | | |_) |
+ ___) | |  | | |_| |  _ &lt;
+|____/|_|  |_|____/|_| \_\</pre>
+    <h2>Silverarch Multi Distro Repositories</h2>
+    <p class="sub" style="margin:0 auto;text-align:center">A modular container management engine — deploy and manage <strong style="color:var(--shi)">50 Linux distribution environments</strong> from a single unified CLI.</p>
+  </div>
+
+  <div class="dg-wrap r">
+    <div class="dg-bar"><span>supported distributions</span><span style="color:var(--green)">50 environments</span></div>
+    <div class="dg" id="dg"></div>
+    <div class="dg-note">
+      <strong>sys install</strong> → limited to 6 core distros: <strong>saur · salp · sfur · subu · sdur · ssol</strong>
+    </div>
+  </div>
+
+  <div class="usage r2">
+    <div class="cc">
+      <div class="cc-t">// install packages</div>
+      <pre><span class="cmt"># install in a distro env</span>
+<span class="kw">$</span> <span class="cmd">smdr</span> <span class="flag">-S</span> <span class="str">saur</span> <span class="cmd">neovim</span>
+<span class="kw">$</span> <span class="cmd">smdr</span> <span class="flag">-S</span> <span class="str">subu</span> <span class="cmd">htop</span>
+<span class="kw">$</span> <span class="cmd">smdr</span> <span class="flag">-S</span> <span class="str">skali</span> <span class="cmd">nmap</span>
+<span class="kw">$</span> <span class="cmd">smdr</span> <span class="flag">-S</span> <span class="str">stur</span> <span class="cmd">python</span></pre>
+    </div>
+    <div class="cc">
+      <div class="cc-t">// container lifecycle</div>
+      <pre><span class="cmt"># deploy a distro container</span>
+<span class="kw">$</span> <span class="cmd">smdr</span> <span class="flag">-adc</span> <span class="str">sfur</span>
+<span class="cmt"># pull &amp; sync image</span>
+<span class="kw">$</span> <span class="cmd">smdr</span> <span class="flag">-Sys</span> <span class="str">sdur</span>
+<span class="cmt"># arch arm (mobile)</span>
+<span class="kw">$</span> <span class="cmd">smdr</span> <span class="flag">-S</span> <span class="str">sarur</span> <span class="cmd">vim</span></pre>
+    </div>
+  </div>
+
+  <div class="usage-hint r">
+    <span>smdr -S [distro] [package]</span> &nbsp;·&nbsp; <span>smdr -adc [distro]</span> &nbsp;·&nbsp; <span>smdr -Sys [distro]</span>
+    &nbsp;&nbsp;<span style="color:var(--dim2)">Note: ensure distro alias is valid when using -Sys</span>
+  </div>
+</div>
+</div>
+
+<hr class="sep">
+
+<!-- COMMUNITY -->
+<div class="wrap" id="community">
+  <div class="r">
+    <div class="lbl">// get involved</div>
+    <h2>Open Source. Open Community.</h2>
+    <p class="sub">English, Arabic, Russian — everyone is welcome. Build, use, and own SilverArch.</p>
+  </div>
+  <div class="cg r2">
+    <a class="ccard" href="https://discord.gg/eBgVHSPru9" target="_blank">
+      <span class="ci">💬</span>
+      <div class="ct">Discord</div>
+      <div class="cd">Multilingual channels, support, and announcements.</div>
+    </a>
+    <a class="ccard" href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">
+      <span class="ci">📚</span>
+      <div class="ct">Wiki</div>
+      <div class="cd">Installation guides, configuration, and full documentation.</div>
+    </a>
+    <a class="ccard" href="https://github.com/iyed-one-st/silverarch-repo" target="_blank">
+      <span class="ci">🐙</span>
+      <div class="ct">GitHub</div>
+      <div class="cd">Open source code, issues, and pull requests.</div>
+    </a>
+    <a class="ccard" href="https://discord.gg/MFNY9m8dVr">
+      <span class="ci">📦</span>
+      <div class="ct">Submit a Package</div>
+      <div class="cd">Want your pkg in the repo? Reach out — 100% free.</div>
+    </a>
+  </div>
+
+  <!-- REPO METRICS -->
+  <div class="r" style="margin-top:56px">
+    <div class="lbl">// repository_metrics</div>
+    <h2>Silverarch Repository</h2>
+  </div>
+  <div class="metrics-row r2">
+    <div class="metric-box">
+      <div class="metric-val" id="pkg-count">—</div>
+      <div class="metric-key">Packages</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-val green">SYNCED</div>
+      <div class="metric-key">Status</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-val" style="color:var(--blue)">x86_64</div>
+      <div class="metric-key">Architecture</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-val" style="color:var(--cyan)">GPL-v3</div>
+      <div class="metric-key">License</div>
+    </div>
+  </div>
+</div>
+
+<!-- PALESTINE BANNER -->
+<div style="max-width:1040px;margin:0 auto;padding:0 24px 48px">
+  <div class="pal-banner">
+    <div class="pal-left">
+      <span class="pal-flag">🇵🇸</span>
+      <div class="pal-text">
+        <strong>We Stand with Palestine</strong>
+        SilverArch Linux stands in solidarity with the Palestinian people. Free Palestine.
+      </div>
+    </div>
+    <a class="pal-link" href="https://www.unrwa.org" target="_blank">Learn More →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="fl" href="#">
+    <img src="Un-removebg-preview.png" alt="" onerror="this.style.display='none'">
+    SilverArch Linux
+  </a>
+  <div class="flinks">
+    <a href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">Wiki</a>
+    <a href="https://discord.gg/eBgVHSPru9" target="_blank">Discord</a>
+    <a href="https://github.com/iyed-one-st/silverarch-repo/" target="_blank">GitHub</a>
+    <a href="https://github.com/iyed-one-st/silverarch-repo/blob/main/LICENSE.txt" target="_blank">License GPL-v3.0</a>
+    <a href="mailto:s1lv3rcore@proton.me">Contact</a>
+  </div>
+  <div class="fn">© 2026 Copyright Silverarch · By Silvercore</div>
+</footer>
+
+<script>
+// distros
+const distros=[
+  [1,'SAUR','Arch'],[2,'SNIX','NixOS'],[3,'SGENT','Gentoo'],[4,'SVOID','Void'],
+  [5,'SSOL','Solus'],[6,'SSLACK','Slackware'],[7,'SALP','Alpine'],[8,'SMAG','Mageia'],
+  [9,'SCLR','Clear'],[10,'STINY','TinyCore'],[11,'SLFS','LFS'],[12,'SDUR','Debian'],
+  [13,'SUBU','Ubuntu'],[14,'SKALI','Kali'],[15,'SPOP','PopOS'],[16,'SLXQT','Lubuntu'],
+  [17,'SFUR','Fedora'],[18,'SCENUR','CentOS'],[19,'SALM','AlmaLinux'],[20,'SROCK','Rocky'],
+  [21,'SFED','Rawhide'],[22,'SGUIX','Guix'],[23,'SFREE','FreeBSD'],[24,'SOPEN','OpenBSD'],
+  [25,'SDEV','Devuan'],[26,'SANTI','AntiX'],[27,'SMINT','Mint'],[28,'SZOR','Zorin'],
+  [29,'SELEM','Elementary'],[30,'SDEEP','Deepin'],[31,'SNIT','Nitrux'],[32,'SPURO','PureOS'],
+  [33,'STAIL','Tails'],[34,'SBLUE','BlueOS'],[35,'SSILVER','SilverArch'],[36,'SLIN','Linpus'],
+  [37,'SPARD','Pardus'],[38,'SREACT','ReactOS'],[39,'SHAIK','Haiku'],[40,'SROS','ROS'],
+  [41,'SVOIDGL','VoidGL'],[42,'SPUP','Puppy'],[43,'SSYS','System76'],[44,'SATXUR','Artix'],
+  [45,'SEND','Endeavour'],[46,'SGAR','Garuda'],[47,'SCACH','CachyOS'],[48,'STUR','Termux'],
+  [49,'SARUR','ArchARM'],[50,'SVUMUR','VoidMobile']
+];
+const g=document.getElementById('dg');
+distros.forEach(([n,a,m])=>{
+  const d=document.createElement('div');
+  d.className='di';
+  d.innerHTML=`<span class="dn">${String(n).padStart(2,'0')}</span><span class="da">${a}</span><span class="dm">${m}</span>`;
+  g.appendChild(d);
+});
+
+// boot animation
+[[700,'t1'],[1450,'t2'],[2000,'t3'],[2750,'t4'],[3350,'t5']].forEach(([ms,id])=>
+  setTimeout(()=>{const e=document.getElementById(id);if(e)e.style.display='block'},ms));
+
+// pkg count
+async function updatePkgCount(){
+  try{
+    const r=await fetch('https://api.github.com/repos/iyed-one-st/silverarch-repo/contents/x86_64');
+    const d=await r.json();
+    const c=d.filter(f=>f.name.endsWith('.pkg.tar.zst')).length;
+    document.getElementById('pkg-count').textContent=c||'—';
+  }catch{document.getElementById('pkg-count').textContent='N/A'}
+}
+updatePkgCount();
+
+// news feed
+fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://www.phoronix.com/rss.php')}`)
+  .then(r=>r.json()).then(d=>{
+    const list=document.getElementById('news-list');
+    list.innerHTML='';
+    d.items.slice(0,5).forEach(item=>{
+      const li=document.createElement('li');
+      li.innerHTML=`<span class="arrow">›</span><a href="${item.link}" target="_blank">${item.title}</a>`;
+      list.appendChild(li);
+    });
+  }).catch(()=>{
+    document.getElementById('news-list').innerHTML='<li><span class="arrow">›</span><a href="#">News feed unavailable.</a></li>';
+  });
+
+// copy code buttons
+function copyCode(btn){
+  const pre=btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText.replace(/^\$\s*/gm,'')).then(()=>{
+    btn.textContent='copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='copy';btn.classList.remove('copied')},2000);
+  });
+}
+
+// scroll reveal
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}});
+},{threshold:.1});
+document.querySelectorAll('.r,.r2').forEach(e=>obs.observe(e));
+</script>
+</body>
+</html>
