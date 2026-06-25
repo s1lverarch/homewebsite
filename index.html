@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SilverArch Linux — Built for Absolute Performance</title>
-<link rel="icon" type="image/x-icon" href="favicon.png">
+<title>SilverArch Linux</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -57,8 +56,8 @@ nav{
 }
 .hero-bg{
   position:absolute;inset:0;
-  background:url('bashscriptwallpaperdark.jpg') center/cover no-repeat;
-  opacity:.13;
+  background:url('Ub.jpg') center/cover no-repeat;
+  opacity:.80;
   pointer-events:none;
 }
 .hero-overlay{
@@ -309,15 +308,16 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
 <nav>
   <a class="nav-logo" href="#">
     <img src="Un-removebg-preview.png" alt="" onerror="this.style.display='none'">
-    SilverArch Linux 
+    SilverArch Linux
   </a>
   <ul class="nav-links">
-    <li><a href="#features">📤-Features</a></li>
-    <li><a href="#about">📍-About</a></li>
-    <li><a href="#smdr">🗂-Smdr</a></li>
-    <li><a href="#community">👥-Community</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#smdr">Tools</a></li>
+    <li><a href="#community">Community</a></li>
   </ul>
-  <a class="nav-btn" href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">📚-Wiki</a>
+  <a class="nav-btn" href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">Wiki Page</a>
 </nav>
 
 <!-- HERO -->
@@ -331,7 +331,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
     <div class="logo-ring"></div>
     <img class="hero-logo" src="Un-removebg-preview.png" alt="SilverArch" onerror="this.style.opacity='0'">
   </div>
-  <div class="hero-tag">Arch-Based · Made in Tunisia · International</div>
+  <div class="hero-tag">Arch-Based · For Everyone · International</div>
   <h1>Built for<br><em>Absolute Performance</em></h1>
   <p class="hero-desc">The first Arabic-Tunisian Arch-based Linux distribution. Minimal, fast, and community-driven across 50 distro environments.</p>
 
@@ -350,8 +350,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
   </div>
 
   <div class="hero-btns">
-    <a class="btn-p" href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">Read the Wiki</a>
-    <a class="btn-g" href="https://discord.gg/eBgVHSPru9" target="_blank">Join Discord</a>
+    <a class="btn-p" href="https://silverarchlinux.miraheze.org/wiki/" target="_blank">Wiki</a>
+    <a class="btn-g" href="https://discord.gg/eBgVHSPru9" target="_blank">Discord</a>
     <a class="btn-g" href="https://github.com/iyed-one-st/silverarch-repo" target="_blank">GitHub</a>
   </div>
 </div>
@@ -375,7 +375,6 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
     <div class="fc"><span class="fi">📖</span><div class="ft">GPL-v3 Open Source</div><div class="fd">Fully open. Contribute packages, docs, translations. Built for everyone, to everything.</div></div>
     <div class="fc"><span class="fi">🚀</span><div class="ft">The Linux Freedom</div><div class="fd">Silverarch Pkg Are Not Pre-Installed Only silverarch-installer and silverarch-keyrings You are The Owner Of The System, So You Choice If You Want Install Or Not  .</div></div>  
   </div>
-
   <!-- DOWNLOAD -->
   <div class="r" style="margin-top:64px">
     <div class="lbl">// release media</div>
@@ -390,8 +389,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
           <div class="dl-ver">v2026.06.22 · x86_64</div>
         </div>
         <div class="dl-sz">
-          <div class="dl-sz-n">1.175 MB</div>
-          <div class="dl-sz-s">Both : UEFI / Legacy Boot</div>
+          <div class="dl-sz-n">1.2 GB</div>
+          <div class="dl-sz-s">UEFI / Legacy Boot</div>
         </div>
       </div>
       <div class="dl-body">
@@ -402,8 +401,10 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
       </div>
     </div>
   </div>
+
+  <!-- INSTALL ON ARCH -->
   <div class="r" style="margin-top:64px">
-    <h2>Installing on top of Arch Linux</h2>
+    <h3>Installing on top of Arch Linux</h3>
     <p class="sub">The Silverarch Repository is a specialized package repository for the Silverarch Linux distribution. Add it to any Arch-based system — Arch Linux, ArchARM, or any Arch-based distro.</p>
   </div>
 
@@ -416,8 +417,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <div class="step-desc">Edit your pacman configuration file with your preferred editor.</div>
         <div class="code-block">
           <div class="cb-bar">
-            <span class="cb-lang">bash</span>
-            <button class="cb-copy" onclick="copyCode(this)">📋-Copy</button>
+            <span class="cb-lang">Bash</span>
+            <button class="cb-copy" onclick="copyCode(this)">Copy</button>
           </div>
           <pre><span class="kw">$</span> sudo nano /etc/pacman.conf</pre>
         </div>
@@ -431,13 +432,16 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <div class="step-desc">Paste this at the bottom of your config file.</div>
         <div class="code-block">
           <div class="cb-bar">
-            <span class="cb-lang">pacman.conf</span>
-            <button class="cb-copy" onclick="copyCode(this)">📋-Copy</button>
+            <span class="cb-lang">Bash : pacman.conf</span>
+            <button class="cb-copy" onclick="copyCode(this)">Copy</button>
           </div>
           <pre><span class="str">[silverarch-repo]</span>
 <span class="cmd">SigLevel</span> = Optional TrustAll
-<span class="cmd">Server</span>   = https://raw.githubusercontent.com/s1lverarch/silverarch-repo/main/x86_64/</pre>
+<span class="cmd">Server</span>   = https://raw.githubusercontent.com/
+           iyed-one-st/silverarch-repo/main/x86_64/</pre>
         </div>
+         Once You Complete In Nano Editor Press Ctrl+O To Save
+         And Ctrl+X To Exit
       </div>
     </div>
 
@@ -448,8 +452,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <div class="step-desc">Update all your repos and packages.</div>
         <div class="code-block">
           <div class="cb-bar">
-            <span class="cb-lang">bash</span>
-            <button class="cb-copy" onclick="copyCode(this)">📋-Copy</button>
+            <span class="cb-lang">Bash</span>
+            <button class="cb-copy" onclick="copyCode(this)">Copy</button>
           </div>
           <pre><span class="kw">$</span> sudo pacman -Syy</pre>
         </div>
@@ -462,11 +466,11 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
   <div class="r" style="margin-top:64px">
     <div class="lbl">// live updates</div>
     <h2>Latest Linux News</h2>
-    <p class="sub">Latest from Phoronix — The Linux Tech Pulse.</p>
+    <p class="sub">Latest from Phoronix...</p>
   </div>
   <div class="news-feed r2">
     <div class="news-feed-bar">
-      <span>phoronix.com · rss feed</span>
+      <span>www.phoronix.com · Rss Feed</span>
       <span>live</span>
     </div>
     <ul id="news-list">
@@ -476,6 +480,29 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
 </div>
 
 <hr class="sep">
+
+<!-- ABOUT -->
+<div class="wrap" id="about">
+  <div class="about-split">
+    <div class="r">
+      <div class="about-screen">
+        <img src="bashscriptwallpaperdark.jpg" alt="SilverArch Linux running">
+      </div>
+    </div>
+    <div class="r2 about-text">
+      <div class="lbl">// origin story</div>
+      <h2>Built for the World.</h2>
+      <p>SilverArch Linux started as a personal project by Silvercore — a Linux distribution engineer from Tunisia who wanted an Arch-based system tuned for real-world performance, not theoretical benchmarks.</p>
+      <p>What began as a local effort grew into the first Arabic Tunisian Arch-based distribution with a truly international audience — supported by a multilingual community spanning Arabic, English, and Russian speakers.</p>
+      <div class="pills">
+        <span class="pill">pacman</span>
+        <span class="pill">AUR</span>
+        <span class="pill">Rolling release</span>
+        <span class="pill">x86_64</span>
+        <span class="pill">GPL-v3</span>
+      </div>
+    </div>
+  </div>
 
   <!-- wallpaper gallery -->
   <div class="r" style="margin-top:64px">
@@ -493,49 +520,13 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
       <span class="gcard-label">darkgalaxy.jpg</span>
     </div>
     <div class="gcard">
-      <img src="yanestashlivdark.jpg" alt="Yanesta Shliv Dark wallpaper">
-      <span class="gcard-label">yanestashlivdark.jpg</span>
+      <img src="yanestashlivdark.jpg" alt="Ya Ne StaShliv Dark wallpaper">
+      <span class="gcard-label">Ub.jpg</span>
     </div>
-  <div class="gcard">
-      <img src="g.jpg" alt="Normal And The First wallpaper">
-      <span class="gcard-label">g.jpg</span>
-  </div>
-   <div class="gcard">
-      <img src="bashscriptwallpaperdark.jpg" alt="Normal And The First wallpaper">
-      <span class="gcard-label">bashscriptwallpaperdark.jpg</span>
-  </div>
-  <div class="gcard">
-      <img src="o.jpg" alt="Normal And The First wallpaper">
-      <span class="gcard-label">o.jpg</span>
   </div>
 </div>
 
 <hr class="sep">
-
-
-<!-- ABOUT -->
-<div class="wrap" id="about">
-  <div class="about-split">
-    <div class="r">
-      <div class="about-screen">
-        <img src="bashscriptwallpaperdark.jpg" alt="SilverArch Linux running">
-      </div>
-    </div>
-    <div class="r2 about-text">
-      <div class="lbl">// origin story</div>
-      <h2>Made in Tunisia.<br>Built for the World.</h2>
-      <p>SilverArch Linux started as a personal project by Silvercore — a Linux distribution engineer from Tunisia who wanted an Arch-based system tuned for real-world performance, not theoretical benchmarks.</p>
-      <p>What began as a local effort grew into the first Arabic Tunisian Arch-based distribution with a truly international audience — supported by a multilingual community spanning Arabic, English, and Russian speakers.</p>
-      <div class="pills">
-        <span class="pill">pacman</span>
-        <span class="pill">AUR</span>
-        <span class="pill">rolling release</span>
-        <span class="pill">x86_64</span>
-        <span class="pill">GPL-v3</span>
-      </div>
-    </div>
-  </div>
-
 
 <!-- SMDR -->
 <div class="smdr-bg" id="smdr">
@@ -552,7 +543,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
   </div>
 
   <div class="dg-wrap r">
-    <div class="dg-bar"><span>supported distributions</span><span style="color:var(--green)">50 environments</span></div>
+    <div class="dg-bar"><span>supported distributions</span><span style="color:var(--red)">50 environments</span></div>
     <div class="dg" id="dg"></div>
     <div class="dg-note">
       <strong>sys install</strong> → limited to 6 core distros: <strong>saur · salp · sfur · subu · sdur · ssol</strong>
@@ -606,7 +597,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
       <div class="ct">Wiki</div>
       <div class="cd">Installation guides, configuration, and full documentation.</div>
     </a>
-    <a class="ccard" href="https://github.com/iyed-one-st/silverarch-repo" target="_blank">
+    <a class="ccard" href="https://github.com/s1lverarch/silverarch-repo" target="_blank">
       <span class="ci">🐙</span>
       <div class="ct">GitHub</div>
       <div class="cd">Open source code, issues, and pull requests.</div>
@@ -670,7 +661,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
     <a href="https://github.com/iyed-one-st/silverarch-repo/blob/main/LICENSE.txt" target="_blank">License GPL-v3.0</a>
     <a href="mailto:s1lv3rcore@proton.me">Contact</a>
   </div>
-  <div class="fn">© 2026 Copyright Silverarch · By Silvercore</div>
+  <div class="fn">© 2026 Copyright Silverarch · By Silverarch</div>
 </footer>
 
 <script>
@@ -684,9 +675,9 @@ const distros=[
   [21,'SFED','Rawhide'],[22,'SGUIX','Guix'],[23,'SFREE','FreeBSD'],[24,'SOPEN','OpenBSD'],
   [25,'SDEV','Devuan'],[26,'SANTI','AntiX'],[27,'SMINT','Mint'],[28,'SZOR','Zorin'],
   [29,'SELEM','Elementary'],[30,'SDEEP','Deepin'],[31,'SNIT','Nitrux'],[32,'SPURO','PureOS'],
-  [33,'STAIL','Tails'],[34,'SBLUE','BlueOS'],[35,'SSILVER','SilverArch'],[36,'SLIN','Linpus'],
+  [33,'STAIL','Tails'],[34,'SBLUE','BlueOS'],[36,'SLIN','Linpus'],
   [37,'SPARD','Pardus'],[38,'SREACT','ReactOS'],[39,'SHAIK','Haiku'],[40,'SROS','ROS'],
-  [41,'SVOIDGL','VoidGL'],[42,'SPUP','Puppy'],[43,'SSYS','System76'],[44,'SATXUR','Artix'],
+  [41,'SVOIDGL','VoidGL'],[42,'SPUP','Puppy'],[43,'SSYS','System'],[44,'SATXUR','Artix'],
   [45,'SEND','Endeavour'],[46,'SGAR','Garuda'],[47,'SCACH','CachyOS'],[48,'STUR','Termux'],
   [49,'SARUR','ArchARM'],[50,'SVUMUR','VoidMobile']
 ];
